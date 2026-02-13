@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import CreatorDashboard from "./pages/CreatorDashboard";
+import ProcessorDashboard from "./pages/ProcessorDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
+import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+
+          {/* Login Route */}
+          <Route path="/" element={<Login />} />
+
+          {/* Creator Route */}
+          <Route
+            path="/creator"
+            element={
+              <ProtectedRoute role="creator">
+                <Layout>
+                  <CreatorDashboard />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Processor Route */}
+          <Route
+            path="/processor"
+            element={
+              <ProtectedRoute role="processor">
+                <Layout>
+                  <ProcessorDashboard />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
