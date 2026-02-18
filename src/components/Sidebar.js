@@ -82,9 +82,9 @@ export default function Sidebar() {
                   <ListItemText primary="Claim List" />
                 </ListItemButton>
 
-                {/* <ListItemButton onClick={() => navigate("/approved")}>
+                <ListItemButton onClick={() => navigate("/approved")}>
                   <ListItemText primary="Approved Claims" />
-                </ListItemButton> */}
+                </ListItemButton>
 
                 {/* <ListItemButton onClick={() => navigate("/rejected")}>
                   <ListItemText primary="Rejected Claims" />
