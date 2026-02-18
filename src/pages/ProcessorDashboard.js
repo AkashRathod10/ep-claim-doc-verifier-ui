@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useEffect, useState } from "react";
 import {
   Table, TableBody, TableCell, TableContainer,
@@ -107,9 +109,11 @@ export default function ProcessorDashboard() {
       const formData = new FormData();
 
       formData.append("pdf_file", topMatchedData?.file);
-      formData.append("claim_id", tableData?.new_claim_id);
-      formData.append("extracted_data", tableData?.extracted_data);
-      formData.append("embedding", tableData?.embedding);
+      formData.append("formData", claimData);
+      // formData.append("extracted_data", tableData?.extracted_data);
+      // formData.append("embedding", tableData?.embedding);
+
+      console.log("FormData final--- ", formData);
 
       const response = await fetch("https://claim-backend-api-b6dqewdzhqfsbed8.ukwest-01.azurewebsites.net/clamis/add_claim_details/", {
             method: "post",
