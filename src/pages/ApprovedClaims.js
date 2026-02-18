@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 import React, { useState, useEffect } from "react";
-import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, Paper, Button } from "@mui/material";
 
 export default function ApprovedClaims() {
 
@@ -49,24 +49,46 @@ useEffect(() => {
     <Paper sx={{ p: 2 }} style={{marginLeft: '-20%'}}>
       <h2>Approved Claims</h2>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Claim ID</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Amount</TableCell>
-            <TableCell>Approved Date</TableCell>
-            <TableCell>Remarks</TableCell>
+          <TableHead>
+              {defaultModalColumns.map((column) => (
+                <TableCell key={column.field} sx={{ width: column.width }}>
+                  <strong>{column.title}</strong>
+                </TableCell>
+              ))}
+          </TableHead>
+       <TableBody>
+        {tableData.map((row) => (
+          <TableRow key={row.claim_id}>
+            
+            <TableCell>{row.claim_id}</TableCell>
+
+            {/* <TableCell>
+              {row.file ? (
+                <Button
+                  size="small"
+                  onClick={() => window.open(row.file, "_blank")}
+                >
+                  Download
+                </Button>
+              ) : (
+                "-"
+              )}
+            </TableCell> */}
+
+            <TableCell>{row.extracted_data?.policy_number}</TableCell>
+            <TableCell>{row.extracted_data?.vehicle_number}</TableCell>
+            <TableCell>{row.extracted_data?.vehicle_model}</TableCell>
+            <TableCell>{row.extracted_data?.owner_name}</TableCell>
+            <TableCell>{row.extracted_data?.mobile}</TableCell>
+            <TableCell>{row.extracted_data?.accident_date}</TableCell>
+            <TableCell>{row.extracted_data?.accident_location}</TableCell>
+            <TableCell>
+              {new Date(row.created_at).toLocaleDateString()}
+            </TableCell>
+
           </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell>1</TableCell>
-            <TableCell>Medical</TableCell>
-            <TableCell>5000</TableCell>
-            <TableCell>2026-02-13</TableCell>
-            <TableCell>Done</TableCell>
-          </TableRow>
-        </TableBody>
+        ))}
+      </TableBody>
       </Table>
     </Paper>
   );

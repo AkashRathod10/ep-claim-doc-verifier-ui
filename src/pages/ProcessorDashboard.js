@@ -11,8 +11,8 @@ import CommonDialog from "../providers/PopupManager";
 import { useSelector } from "react-redux";
 
 const defaultColumns = [
-  {width: 200, title: 'Claim ID', field: 'claim_id', enableSearch: true, enableFilter: true},
-  {width: 200, title: 'Matched Claim ID', field: 'new_claim_id', enableSearch: true, enableFilter: true},
+  {width: 200, title: 'Matched Claim ID', field: 'claim_id', enableSearch: true, enableFilter: true},
+  {width: 200, title: 'New Claim ID', field: 'new_claim_id', enableSearch: true, enableFilter: true},
   {width: 200, title: 'Similarity Percentage', field: 'similarity_percentage', enableSearch: true, enableFilter: true},
   // {width: 100, title: 'Status', field: 'status', enableSearch: true, enableFilter: true},
   // {width: 100, title: 'Policy Number', field: 'policy_number', enableSearch: true, enableFilter: true},
