@@ -5,6 +5,9 @@ import ProcessorDashboard from "./pages/ProcessorDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout";
+import ApprovedClaims from "./pages/ApprovedClaims";
+import RejectedClaims from "./pages/RejectedClaims";
+import Overview from "./pages/Overview";
 
 function App() {
   return (
@@ -37,6 +40,31 @@ function App() {
                 </Layout>
               </ProtectedRoute>
             }
+          />
+
+          <Route path="/approved" element={
+            <ProtectedRoute role="processor">
+              <Layout>
+                <ApprovedClaims />
+              </Layout>
+            </ProtectedRoute>  
+           }
+          />
+          <Route path="/rejected" element={
+            <ProtectedRoute role="processor">
+              <Layout>
+                <RejectedClaims />
+              </Layout>
+            </ProtectedRoute>  
+           }
+          />
+          <Route path="/overview" element={
+            <ProtectedRoute role="processor">
+              <Layout>
+                <Overview />
+              </Layout>
+            </ProtectedRoute>
+          }
           />
 
         </Routes>
