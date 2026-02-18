@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { TextField, Button, Container, Paper, Typography } from "@mui/material";
+import { TextField, Button, MenuItem, Container, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
@@ -25,12 +25,24 @@ export default function Login() {
       <Paper sx={{ p: 4, mt: 10 }}>
         <Typography variant="h5">Login</Typography>
 
-        <TextField
+        {/* <TextField
           fullWidth
           margin="normal"
           label="Username"
           onChange={(e) => setForm({ ...form, username: e.target.value })}
-        />
+        /> */}
+
+        <TextField
+          fullWidth
+          select
+          label="Select User"
+          // value={role}
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
+          margin="normal"
+        >
+          <MenuItem value="creator">Creator</MenuItem>
+          <MenuItem value="processor">Processor</MenuItem>
+        </TextField>
 
         <TextField
           fullWidth

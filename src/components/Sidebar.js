@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   Drawer,
   List,
@@ -8,18 +8,15 @@ import {
   Toolbar,
   Typography,
   Divider,
-  Collapse,
   Box,
-  Button,
 } from "@mui/material";
 
 import {
   Dashboard,
+  Description,
   UploadFile,
-  Approval,
-  ExpandLess,
-  ExpandMore,
-  Logout,
+  CheckCircle,
+  Cancel,
 } from "@mui/icons-material";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -28,18 +25,20 @@ import { AuthContext } from "../context/AuthContext";
 const drawerWidth = 240;
 
 export default function Sidebar() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [openMenu, setOpenMenu] = useState(true);
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
+  // Function to check active route
   const isActive = (path) => location.pathname === path;
+
+  const menuItemStyle = (path) => ({
+    backgroundColor: isActive(path) ? "#334155" : "transparent",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#475569",
+    },
+  });
 
   return (
     <Drawer
@@ -57,26 +56,15 @@ export default function Sidebar() {
     >
       <Toolbar>
         <Typography variant="h6" fontWeight="bold">
-          Claim Docs Verify
+          Claim Management
         </Typography>
       </Toolbar>
 
       <Divider sx={{ backgroundColor: "#334155" }} />
 
       <List>
-        {/* Dashboard Menu */}
-        <ListItemButton onClick={() => setOpenMenu(!openMenu)}>
-          <ListItemIcon sx={{ color: "#fff" }}>
-            <Dashboard />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-          {openMenu ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
 
-        <Collapse in={openMenu} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-
-            {/* Creator Menu */}
+          {/* Creator Menu */}
             {user?.role === "creator" && (
               <ListItemButton
                 sx={{ pl: 4 }}
@@ -86,42 +74,34 @@ export default function Sidebar() {
                 <ListItemIcon sx={{ color: "#fff" }}>
                   <UploadFile />
                 </ListItemIcon>
-                <ListItemText primary="Upload Documents" />
+                <ListItemText primary="Upload Claim Documents" />
               </ListItemButton>
             )}
 
             {/* Processor Menu */}
             {user?.role === "processor" && (
-              <ListItemButton
-                sx={{ pl: 4 }}
-                selected={isActive("/processor")}
-                onClick={() => navigate("/processor")}
-              >
-                <ListItemIcon sx={{ color: "#fff" }}>
-                  <Approval />
-                </ListItemIcon>
-                <ListItemText primary="Approve Documents" />
-              </ListItemButton>
+            <>
+                 {/* <ListItemButton onClick={() => navigate("/overview")}>
+                  <ListItemText primary="Overview" />
+                </ListItemButton> */}
+
+                <ListItemButton onClick={() => navigate("/processor")}>
+                  <ListItemText primary="Claim List" />
+                </ListItemButton>
+
+                {/* <ListItemButton onClick={() => navigate("/approved")}>
+                  <ListItemText primary="Approved Claims" />
+                </ListItemButton> */}
+
+                {/* <ListItemButton onClick={() => navigate("/rejected")}>
+                  <ListItemText primary="Rejected Claims" />
+                </ListItemButton> */}
+              </>
             )}
 
-          </List>
-        </Collapse>
       </List>
 
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* Logout Button */}
-      <Box sx={{ p: 2 }}>
-        <Button
-          fullWidth
-          variant="contained"
-          color="error"
-          startIcon={<Logout />}
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
-      </Box>
     </Drawer>
   );
 }
