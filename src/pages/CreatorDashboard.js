@@ -70,7 +70,14 @@ export default function CreatorDashboard() {
     setPopup(false);
     alert("Claim Submitted Successfully!!");
     setFile(null);
-    setClaimData({});
+    setClaimData({
+      type: "",
+      description: "",
+      amount: "",
+      incidentDate: "",
+      policyNumber: "",
+      remarks: "",
+    });
   };
 
   const handleSubmit = async () => {
@@ -79,7 +86,7 @@ export default function CreatorDashboard() {
 
     const formData = new FormData();
     formData.append("pdf_file", file);
-
+    
     console.log("formData: ", formData);
 
     try {

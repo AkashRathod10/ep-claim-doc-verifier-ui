@@ -56,13 +56,13 @@ export default function Login() {
           Login
         </Button>
 
-        <Typography mt={2}>
+        {/* <Typography mt={2}>
           Dummy:
           <br />
           creator / 123
           <br />
           processor / 123
-        </Typography>
+        </Typography> */}
       </Paper>
     </Container>
   );
