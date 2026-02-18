@@ -1,10 +1,13 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+
+import React, { useState, useEffect } from "react";
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper } from "@mui/material";
 
 export default function ApprovedClaims() {
 
   const [tableData, setTableData] = useState([]);
-  
+
     const defaultModalColumns = [
     {width: 200, title: 'Claim ID', field: 'claim_id', enableSearch: true, enableFilter: true},
     {width: 100, title: 'Policy Number', field: 'policy_number', enableSearch: true, enableFilter: true},
@@ -29,11 +32,8 @@ export default function ApprovedClaims() {
           method: "GET",
         });
         const res = await response.json();
-        // console.log("modal data----------: ", res);
-        setModalData(res);
-          // if (res?.data?.length > 0) {
-          //     setPopup(true);
-          // }
+        console.log("tableData----------: ", res);
+        setTableData(res);
 
       } catch (error) {
         console.error(error);
@@ -41,6 +41,9 @@ export default function ApprovedClaims() {
 
   };
 
+useEffect(() => {
+  getApprovedClaimDetails();
+},[])
 
   return (
     <Paper sx={{ p: 2 }} style={{marginLeft: '-20%'}}>
