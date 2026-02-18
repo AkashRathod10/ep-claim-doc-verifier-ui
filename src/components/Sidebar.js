@@ -11,14 +11,7 @@ import {
   Box,
 } from "@mui/material";
 
-import {
-  Dashboard,
-  Description,
-  UploadFile,
-  CheckCircle,
-  Cancel,
-} from "@mui/icons-material";
-
+import { UploadFile } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
@@ -32,13 +25,13 @@ export default function Sidebar() {
   // Function to check active route
   const isActive = (path) => location.pathname === path;
 
-  const menuItemStyle = (path) => ({
-    backgroundColor: isActive(path) ? "#334155" : "transparent",
-    color: "#fff",
-    "&:hover": {
-      backgroundColor: "#475569",
-    },
-  });
+  // const menuItemStyle = (path) => ({
+  //   backgroundColor: isActive(path) ? "#334155" : "transparent",
+  //   color: "#fff",
+  //   "&:hover": {
+  //     backgroundColor: "#475569",
+  //   },
+  // });
 
   return (
     <Drawer
